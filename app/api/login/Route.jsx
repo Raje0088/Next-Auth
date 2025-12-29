@@ -5,7 +5,7 @@ export async function POST(request) {
     const { email, password } = await request.json();
 
     // Checks for specific hardcoded credentials
-    if (email !== "abc@gmail.com" && password !== "abc123456") {
+    if (email !== "abc@gmail.com" || password !== "abc") {
         return NextResponse.json({ error: "Invalid Credentials" }, { status: 401 });
     }
 
