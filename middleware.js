@@ -1,30 +1,10 @@
-// import { NextResponse } from "next/server";
-// import { verifyToken } from "./app/lib/auth";
-
-// export async function middleware(req) {
-//     const token = req.cookies.get('token')?.value; //
-//     const user = token ? await verifyToken(token) : null; //
-//     console.log(user); //
-
-//     if (!user) {
-//         return NextResponse.redirect(new URL("/login", req.url)); //
-//     }
-
-//     return NextResponse.next(); //
-// }
-
-// export const config = {
-//     matcher: ["/dashboard/:path*"], //
-// };
-
 import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
-import { signToken, verifyToken } from "./lib/Auth";
+import { signToken, verifyToken } from "./app/lib/Auth";
 
 const secret = new TextEncoder().encode("abcde");
 
-export async function middleware(req: NextRequest) {
+export async function middleware(req) {
   const token = req.cookies.get("token")?.value;
   const refreshToken = req.cookies.get("refreshToken")?.value;
 
@@ -79,5 +59,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard/:path*", "/products/:path*"],
 };
